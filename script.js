@@ -9,18 +9,145 @@ $("document").ready(function(){
 
 //List Global Variables
 var gameLoop = false;
-var heroes = ['Phantom','Ddosser','Kronos'];
 var enemies = ['Phantom','Ddosser','Kronos'];
-var lives = 10;
-var shipLocation = 0;
+var picked = false;
+var enemyHero;
+//Item Armor Leather
+var HelmofLeather = [
+    {armor: 2},
+    {weight: 2}
+];
+var ChestplateofLeather = [
+    {armor: 2},
+    {weight: 3}
+];
+var ClothBracers = [
+    {armor: 1},
+    {weight: 1}
+];
+var LeggingsofLeather = [
+    {armor: 2},
+    {weight: 2}
+];
+var LeatherBoots = [
+    {armor: 2},
+    {weight: 3}
+];
+//Item Armor weaved leather armor
+var HelmofWeavedLeather = [
+    {armor: 3},
+    {weight: 2}
+];
+var ChestplateofWeavedLeather = [
+    {armor: 3},
+    {weight: 3}
+];
+var LeatherWeavedBracers = [
+    {armor: 2},
+    {weight: 1}
+];
+var LeatherWeavedLeggings = [
+    {armor: 3},
+    {weight: 2}
+];
+var LeatherWeavedBoots = [
+    {armor: 3},
+    {weight: 3}
+];
+//Item Armor Light Steel 0:Chestplate 1:Bracers 2:Leggings 3:boots
+var LightSteelArmor = [ 
+    {item: ["ChestplateofLightSteel",
+            3,//armor
+            4,//weight
+    ]},
+    {item: ["LightSteelBracers",
+            3,//armor
+            2,//weight
+    ]},
+    {item: ["LightSteelLeggings",
+            2,
+            2,
+    ]},
+    {item: ["LightSteelBoots",
+            2,
+            3,
+    ]},
+]
+//Item Weapon Wood
+var WoodWeapons = [
+    {item: ["WoodenShiv",
+            5,//Damage
+            ""//
+    ]},
+];
+var WoodenShiv = [
+    {damage: 5},
+    {weight: 1}
+];
+var WoodenSword = [
+    {damage: 7},
+    {weight: 1}
+];
+var WoodenPike = [
+    {damage: 8},
+    {weight: 1}
+];
+//Item Weapon Light Steel
+var LightSteelShiv = [
+    {damage: 5},
+    {weight: 1}
+];
+var LightSteelSword = [
+    {damage: 7},
+    {weight: 1}
+];
+var LightSteelPike = [
+    {damage: 8},
+    {weight: 1}
+];
+//Item Consumeable Variables
+var SmallHealthPotion = [
+    {health: 5},
+    {weight: 0}
+];
+
+
+//Enemy Variables
+var enemyHero;
+var enemyArmor;
+var enemyDamage;
+var enemyHealth;
+//Enemy Inventory Object
+var enemyInventory = [];
+
+//Hero Variables
 var hero;
+var heroDiv;
+var heroes = ['Phantom','Ddosser','Kronos'];
+var lives = 10;
 var damage = 0;
 var armor = 0;
 var health = "Select a Hero!!";
-var heroDiv;
-var ship;
-var picked = false;
-var enemyHero;
+var weight = 0;
+
+//Inventory object
+var inventory = [
+    helmet = HelmofLeather,//0
+    chestplate = ChestplateofLeather,//1
+    bracers = ClothBracers,//2
+    sword = WoodenShiv,
+    leggings = LeggingsofLeather,
+    shoes = LeatherBoots
+]
+
+//Compute Stats function
+function computeStats(){
+    damage = inventory[3][0];//Gets damage from weapon
+    for(i = 0; i < inventory.length; i++){
+        weight += (inventory[i][1]);
+        armor += (inventory[i][0]);
+    }
+}
 
 //List Hero Objects
 var enemyHeroes = [
